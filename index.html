@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour ma constellation de douceur ✨</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;min-height:100%;font-family:Georgia,"Times New Roman",serif;background:#090611;color:#fff;overflow-x:hidden}
+  body{display:flex;align-items:center;justify-content:center;min-height:100vh}
+  .stars,.stars::before,.stars::after{position:fixed;inset:0;content:"";pointer-events:none;background-image:
+    radial-gradient(circle,rgba(255,255,255,.8) 1px,transparent 1.5px),
+    radial-gradient(circle,rgba(255,220,245,.55) 1px,transparent 1.5px);
+    background-size:120px 120px,180px 180px;background-position:20px 30px,80px 100px;animation:drift 24s linear infinite}
+  .stars::before{opacity:.35;transform:scale(1.5);animation-duration:38s}
+  .stars::after{opacity:.22;transform:scale(2);animation-duration:55s}
+  @keyframes drift{to{transform:translate3d(40px,25px,0)}}
+  .orb{position:fixed;width:45vw;height:45vw;max-width:520px;max-height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(214,116,184,.18),rgba(114,71,176,.07) 45%,transparent 70%);
+    filter:blur(8px);pointer-events:none}
+  main{width:min(900px,92vw);min-height:620px;position:relative;display:flex;align-items:center;justify-content:center;padding:30px 0}
+  .screen{display:none;width:100%;text-align:center;animation:appear .9s ease}
+  .screen.active{display:block}
+  @keyframes appear{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+  .eyebrow{letter-spacing:5px;text-transform:uppercase;font:600 11px Arial,sans-serif;opacity:.65;margin-bottom:22px}
+  h1{font-size:clamp(40px,8vw,76px);font-weight:400;line-height:1.03;margin-bottom:22px}
+  h2{font-size:clamp(28px,5vw,48px);font-weight:400;line-height:1.12;margin-bottom:18px}
+  .glow{color:#ffd9f2;text-shadow:0 0 24px rgba(255,159,218,.55)}
+  p{font:400 17px/1.8 Arial,sans-serif;color:rgba(255,255,255,.78);max-width:650px;margin:0 auto 28px}
+  .quote{font-size:clamp(20px,3.5vw,31px);line-height:1.5;font-style:italic;color:#f8e8f4;max-width:700px;margin:0 auto 32px}
+  button{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:#fff;border-radius:999px;
+    padding:14px 25px;font:600 13px Arial,sans-serif;letter-spacing:1.5px;cursor:pointer;transition:.3s;backdrop-filter:blur(10px)}
+  button:hover{background:rgba(255,255,255,.14);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.25)}
+  .choices{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+  .secret{margin:28px auto 0;min-height:60px;max-width:600px;color:#ffdff1;font:italic 18px/1.6 Georgia,serif;opacity:0;transition:1s}
+  .secret.show{opacity:1}
+  .heart{font-size:54px;display:block;margin-bottom:18px;animation:pulse 2.1s infinite}
+  @keyframes pulse{50%{transform:scale(1.12);text-shadow:0 0 30px rgba(255,110,190,.65)}}
+  .counter{font:12px Arial,sans-serif;letter-spacing:3px;opacity:.45;margin-top:28px}
+  .music{position:fixed;right:18px;top:18px;z-index:5;font-size:11px;padding:10px 14px}
+  .final{font-size:clamp(24px,4vw,38px);line-height:1.45;color:#ffe7f5}
+  .spark{display:inline-block;animation:twinkle 1.7s infinite}
+  @keyframes twinkle{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+  .progress{position:fixed;left:0;top:0;height:2px;background:rgba(255,190,230,.8);width:0;transition:width .6s ease}
+  .tiny{font-size:12px!important;opacity:.45!important;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="stars"></div><div class="orb"></div><div class="progress" id="progress"></div>
+
+<button class="music" id="musicBtn">♫ Musique</button>
+<audio id="music" loop preload="none">
+  <!-- Remplace cette source par ton fichier audio si tu en as un. -->
+  <source src="musique.mp3" type="audio/mpeg">
+</audio>
+
+<main>
+  <section class="screen active">
+    <div class="eyebrow">Il était une fois…</div>
+    <span class="heart">✦</span>
+    <h1>Une petite surprise<br><span class="glow">pour toi.</span></h1>
+    <p>Mais avant de découvrir la suite, il va falloir me faire confiance.</p>
+    <button data-next>Entrer dans mon univers →</button>
+    <div class="counter">01 / 06</div>
+  </section>
+
+  <section class="screen">
+    <div class="eyebrow">Entre nous</div>
+    <h2>Rama, il y a quelque chose<br>que je voulais te dire.</h2>
+    <p class="quote">« Parmi toutes les étoiles qu'on pourrait regarder, il y en a une qui a réussi à attirer mon regard plus longtemps que les autres. »</p>
+    <button data-next>Continuer ✦</button>
+    <div class="counter">02 / 06</div>
+  </section>
+
+  <section class="screen">
+    <div class="eyebrow">Ton nom secret</div>
+    <h2>Ma <span class="glow">constellation de douceur</span>.</h2>
+    <p>Oui, c'est comme ça que je te vois ici. Pas comme une simple étoile, mais comme celle qu'on remarque même quand le ciel est rempli de lumière.</p>
+    <button id="reveal">J'ai envie d'en savoir plus…</button>
+    <div class="secret" id="secret">Et le plus drôle ? Plus j'avance, plus j'ai envie de rester dans ton orbite. ✨</div>
+    <div class="counter">03 / 06</div>
+  </section>
+
+  <section class="screen">
+    <div class="eyebrow">Attention…</div>
+    <h2>On arrive à la partie<br>un peu plus <span class="glow">piquante.</span></h2>
+    <p>Rien de compliqué : choisis simplement la réponse qui te ressemble le plus.</p>
+    <div class="choices">
+      <button data-next>Je suis curieuse 👀</button>
+      <button data-next>Je sais déjà que je vais sourire 😌</button>
+    </div>
+    <div class="counter">04 / 06</div>
+  </section>
+
+  <section class="screen">
+    <div class="eyebrow">Dernier détour</div>
+    <h2>Si tu es arrivée jusque-là…</h2>
+    <p class="quote">…c'est probablement que tu mérites de savoir une chose :</p>
+    <p class="final">tu occupes une place vraiment particulière dans mes pensées. <span class="spark">✦</span></p>
+    <button data-next>Voir la dernière page →</button>
+    <div class="counter">05 / 06</div>
+  </section>
+
+  <section class="screen">
+    <div class="eyebrow">Pour toi, Rama</div>
+    <span class="heart">♡</span>
+    <h2>Ma constellation de douceur.</h2>
+    <p class="final">La surprise s'arrête ici…<br>mais pas ce que j'avais envie de te faire ressentir.</p>
+    <p class="tiny">Si tu souris en lisant ça, alors j'ai réussi mon coup.</p>
+    <button id="restart">Recommencer ✦</button>
+    <div class="counter">06 / 06</div>
+  </section>
+</main>
+
+<script>
+const screens=[...document.querySelectorAll('.screen')];
+const progress=document.getElementById('progress');
+let current=0;
+
+function show(i){
+  current=(i+screens.length)%screens.length;
+  screens.forEach((s,n)=>s.classList.toggle('active',n===current));
+  progress.style.width=((current+1)/screens.length*100)+'%';
+}
+document.querySelectorAll('[data-next]').forEach(btn=>{
+  btn.addEventListener('click',()=>show(current+1));
+});
+document.getElementById('restart').addEventListener('click',()=>show(0));
+
+const reveal=document.getElementById('reveal');
+const secret=document.getElementById('secret');
+reveal.addEventListener('click',()=>{
+  secret.classList.add('show');
+  reveal.textContent='Alors, on continue… →';
+  reveal.onclick=()=>show(current+1);
+});
+
+const audio=document.getElementById('music');
+const musicBtn=document.getElementById('musicBtn');
+let playing=false;
+musicBtn.addEventListener('click',async()=>{
+  try{
+    if(!playing){await audio.play(); playing=true; musicBtn.textContent='♫ Musique : ON';}
+    else{audio.pause(); playing=false; musicBtn.textContent='♫ Musique';}
+  }catch(e){
+    musicBtn.textContent='Ajoute musique.mp3';
+  }
+});
+</script>
+</body>
+</html>
